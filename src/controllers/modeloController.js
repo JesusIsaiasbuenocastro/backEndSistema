@@ -102,7 +102,7 @@ exports.getModeloById = async(req,res) => {
                     }
             }
           ]);
-          console.log(modelos);
+        // console.log(modelos);
         //console.log(JSON.stringify(modelos))
         if(modelos.length === 0){
             return res.status(400).json({});

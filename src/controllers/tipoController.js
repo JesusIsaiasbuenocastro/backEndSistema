@@ -6,7 +6,7 @@ exports.getTipo = async(req,res) => {
 
         //Validar que no exista 
         let tipos = await Tipo.find();
-        console.log(tipos);
+       // console.log(tipos);
         if(!tipos){
            return res.status(400).json({msg: 'El catalogo tipos no existe'});
         }

@@ -2,26 +2,23 @@ const mongoose = require('mongoose');
 
 const InventarioSchema = mongoose.Schema({
     id: {
-        type: String,
+        type: Number,
         require: true,
-        trim: true,
         unique:true
     },
     marca: {
-        type: String,
-        trim: true,
-        unique:true
+        type: Number,
+        trim: true
     },
     modelo :{
-        type: String,
-        trim: true,
-        unique:true
+        type: Number,
+        trim: true
     },
     year :{
         type: Number
     },
     tipo: {
-        type: String,
+        type: Number,
         trim: true
     },
     color: {

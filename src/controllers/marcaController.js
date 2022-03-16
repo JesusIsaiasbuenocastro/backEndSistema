@@ -15,28 +15,19 @@ exports.crearMarca = async(req,res) => {
         
         //Validar que no exista 
         let marca = await Marca.findOne({nombre});
-        console.log('marca');
-        console.log(marca);
+        
         if(marca){
             return res.status(400).json({msg: 'El marca ya existe'})
         }
 
         let  ultimoRegistro = await Marca.aggregate([{$sort:{id:-1}}, {$limit:1}]);
-        if(ultimoRegistro.length > 0){
-            console.log('trae datos' );
-        }else{
-            console.log('No trae datos' );
-        }
-        console.log('consulto marcas');
-        console.log(ultimoRegistro );
-
         //Crear la marca
         marca = new Marca(req.body);
 
         marca.id = ultimoRegistro.length > 0 ? ultimoRegistro[0].id +1  :  1;
 
         //guardar la marca
-        marca.save();
+        await marca.save();
 
         //regresar la respuesta
         res.status(200).send('El registro creado correctamente');
@@ -53,7 +44,6 @@ exports.getMarca = async(req,res) => {
 
         //Validar que no exista 
         let marca = await Marca.find();
-        console.log(marca);
         if(!marca){
            return res.status(400).json({msg: 'El marca no existe'})
         }
@@ -85,7 +75,6 @@ exports.getMarcaById = async(req,res) => {
         //Validar que no exista 
         let marca = await Marca.findOne({id: req.params.id});
         //let marca = await Marca.findOne({id: id});
-        console.log(marca);
         if(!marca){
            return res.status(400).json({});
         }
@@ -106,7 +95,6 @@ exports.deleteById = async(req,res) => {
     try {
         
 
-        console.log(req.params.id);
         
         //Extraer los valores
         const { id } = req.body; //Cuando se obtiene del body json(por ejemplo)
@@ -152,13 +140,11 @@ exports.actualizar = async(req,res) => {
         
         
         let marca = await Marca.findOne({id: req.params.id});
-        console.log(marca);
         if(!marca){
             return res.status(404).json({ msg: 'Proyecto no encontrado'});
         }
        
         marca.nombre = nombre;
-        console.log(marca);
         //Validar que no exista 
         marca = await Marca.findByIdAndUpdate ({_id: marca._id}, {$set : marca} , {new: true} );
 

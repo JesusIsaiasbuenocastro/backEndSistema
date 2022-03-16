@@ -28,6 +28,8 @@ app.use('/api/usuario',cors(corsOptions),require('./src/routers/usuarioRoutes'))
 
 app.use('/api/tipo',cors(corsOptions),require('./src/routers/tipoRoutes'));
 
+app.use('/api/cotizacion',cors(corsOptions),require('./src/routers/cotizacionRoutes'));
+
 //arrancar el servidor 
 app.listen(PORT, ()=> {
     console.log(`El servidor esta corriendo en el puerto ${PORT}`)
